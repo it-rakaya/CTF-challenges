@@ -1,0 +1,11 @@
+COMPANY POLICIES
+================
+
+- Data Retention: customer data is retained per the data retention
+  schedule and deleted afterward.
+- Expense Policy: submit expense reports within 30 days.
+- Remote Work: employees may work remotely per team agreement.
+- Security Policy: report any suspected security issue to the
+  security team immediately.
+
+See the internal wiki for the full policy library.

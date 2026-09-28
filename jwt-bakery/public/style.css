@@ -1,0 +1,163 @@
+:root {
+  --crust: #f4e3c1;
+  --choc: #4a2c1a;
+  --icing: #fff8ef;
+  --accent: #c9722e;
+  --danger: #a4342a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  background: var(--crust);
+  color: var(--choc);
+  min-height: 100vh;
+}
+
+header.nav {
+  background: var(--choc);
+  color: var(--icing);
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header.nav a {
+  color: var(--icing);
+  text-decoration: none;
+  margin-left: 1.25rem;
+  font-weight: bold;
+}
+
+header.nav a:hover {
+  color: var(--accent);
+}
+
+.brand {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+main {
+  max-width: 720px;
+  margin: 2.5rem auto;
+  background: var(--icing);
+  border-radius: 12px;
+  padding: 2rem 2.5rem;
+  box-shadow: 0 6px 18px rgba(74, 44, 26, 0.15);
+}
+
+h1 {
+  margin-top: 0;
+}
+
+.pastry-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 1.5rem 0;
+}
+
+.pastry {
+  background: var(--crust);
+  border-radius: 10px;
+  padding: 1rem;
+  flex: 1 1 140px;
+  text-align: center;
+}
+
+.pastry .emoji {
+  font-size: 2.5rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  max-width: 320px;
+}
+
+label {
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"] {
+  padding: 0.6rem 0.7rem;
+  border: 1px solid #d8c39d;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+button {
+  background: var(--accent);
+  color: var(--icing);
+  border: none;
+  padding: 0.7rem 1.1rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  background: #a85a1f;
+}
+
+.error {
+  color: var(--danger);
+  font-weight: bold;
+}
+
+.token-box {
+  background: #2b1a10;
+  color: #f4e3c1;
+  padding: 1rem;
+  border-radius: 8px;
+  word-break: break-all;
+  font-family: "Courier New", monospace;
+  font-size: 0.85rem;
+  margin: 1rem 0;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  background: var(--accent);
+  color: var(--icing);
+}
+
+.hint {
+  background: #fdeed0;
+  border-left: 4px solid var(--accent);
+  padding: 0.8rem 1rem;
+  border-radius: 6px;
+  margin: 1.25rem 0;
+  font-size: 0.95rem;
+}
+
+.flag {
+  font-size: 1.1rem;
+  font-weight: bold;
+  background: var(--choc);
+  color: #ffd28a;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+footer {
+  text-align: center;
+  color: #7a5b3d;
+  font-size: 0.85rem;
+  padding: 2rem 0;
+}

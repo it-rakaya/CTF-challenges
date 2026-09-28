@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ShopNest - My Orders</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="nav" id="nav"></div>
+  <div class="container">
+    <h1>My Orders</h1>
+    <p class="subtitle">View your order details.</p>
+    <div class="card">
+      <div id="orders">Loading...</div>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+  <script>
+    (async () => {
+      const username = await requireUser();
+      if (!username) return;
+      renderNav(username, 'orders');
+
+      const box = document.getElementById('orders');
+      const r = await getJSON('/orders');
+      if (!r.ok) { box.textContent = 'Could not load your orders.'; return; }
+      if (!r.body.length) { box.textContent = 'You have not placed any orders yet.'; box.className = 'empty'; return; }
+
+      const table = document.createElement('table');
+      table.innerHTML = '<thead><tr><th>Order</th><th>Product</th><th>Price</th><th>Status</th><th></th></tr></thead>';
+      const tbody = document.createElement('tbody');
+      r.body.forEach((o) => {
+        const tr = document.createElement('tr');
+        const cells = ['#' + o.id, o.product, money(o.price), o.status];
+        cells.forEach((text) => {
+          const td = document.createElement('td');
+          td.textContent = text;
+          tr.appendChild(td);
+        });
+        const td = document.createElement('td');
+        const a = document.createElement('a');
+        a.href = '/orders/' + o.id;
+        a.textContent = 'View details';
+        td.appendChild(a);
+        tr.appendChild(td);
+        tbody.appendChild(tr);
+      });
+      table.appendChild(tbody);
+      box.textContent = '';
+      box.appendChild(table);
+    })();
+  </script>
+</body>
+</html>

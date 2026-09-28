@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Company Document Portal</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <h1>📁 Company Document Portal</h1>
+    <p class="tagline">Read Between the Lines — internal document access</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Available Documents</h2>
+      <p class="hint">Documents are retrieved directly from the server.</p>
+      <ul id="doc-list" class="doc-list">
+        <!-- populated by script -->
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>Internal use only. &copy; 2026 Company Document Portal.</p>
+  </footer>
+
+  <script>
+    fetch('/api/documents')
+      .then(r => r.json())
+      .then(docs => {
+        const list = document.getElementById('doc-list');
+        docs.forEach(doc => {
+          const li = document.createElement('li');
+          li.innerHTML = `
+            <span class="doc-name">${doc.label}</span>
+            <a class="btn" href="/download?file=${encodeURIComponent(doc.file)}">Download</a>
+          `;
+          list.appendChild(li);
+        });
+      });
+  </script>
+</body>
+</html>

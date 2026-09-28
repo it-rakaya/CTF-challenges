@@ -1,0 +1,15 @@
+ARCHITECTURE OVERVIEW
+=====================
+
+Our platform is composed of several services:
+
+- API Gateway: routes incoming requests to internal services.
+- Auth Service: handles authentication and session management.
+- Document Service: stores and serves internal documents.
+- Notification Service: sends emails and alerts.
+
+Documents are retrieved directly from the server's local filesystem
+by the Document Service, based on the filename requested by the
+client.
+
+For more details, see the internal architecture wiki.

@@ -1,0 +1,14 @@
+{
+  "name": "debug-mode",
+  "version": "1.0.0",
+  "description": "Rakaya Internal Portal - intentionally vulnerable CTF training app (verbose error disclosure)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

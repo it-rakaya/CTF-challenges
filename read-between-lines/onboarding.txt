@@ -1,0 +1,17 @@
+ONBOARDING GUIDE
+================
+
+Week 1:
+- Set up your laptop and dev environment.
+- Meet your onboarding buddy.
+- Complete security awareness training.
+
+Week 2:
+- Get read access to relevant repositories.
+- Shadow a teammate on a real ticket.
+
+Week 3:
+- Pick up your first small task.
+- Attend the engineering all-hands.
+
+Welcome aboard!

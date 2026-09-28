@@ -1,0 +1,43 @@
+[
+  {
+    "id": 1001,
+    "owner": "alice",
+    "product": "Laptop",
+    "price": 4500,
+    "status": "Delivered",
+    "date": "2026-08-14"
+  },
+  {
+    "id": 1002,
+    "owner": "alice",
+    "product": "Mechanical Keyboard",
+    "price": 500,
+    "status": "Shipped",
+    "date": "2026-09-02"
+  },
+  {
+    "id": 1003,
+    "owner": "bob",
+    "product": "Monitor",
+    "price": 1200,
+    "status": "Processing",
+    "date": "2026-09-20"
+  },
+  {
+    "id": 1004,
+    "owner": "bob",
+    "product": "Printer",
+    "price": 600,
+    "status": "Delivered",
+    "date": "2026-09-20"
+  },
+  {
+    "id": 9999,
+    "owner": "admin",
+    "product": "Secret CTF Package",
+    "price": 0,
+    "status": "Delivered",
+    "date": "2026-01-01",
+    "flag": "CTF{idor_object_authorization_matters}"
+  }
+]

@@ -1,0 +1,12 @@
+{
+  "name": "read-between-the-lines",
+  "version": "1.0.0",
+  "description": "CTF training app demonstrating a Path Traversal / Directory Traversal vulnerability.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

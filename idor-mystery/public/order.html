@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ShopNest - Order details</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="nav" id="nav"></div>
+  <div class="container">
+    <h1 id="title">Order details</h1>
+    <p class="subtitle"><a href="/orders">&larr; Back to My Orders</a></p>
+    <div class="card">
+      <div id="details">Loading...</div>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+  <script>
+    const LABELS = {
+      id: 'Order number', owner: 'Placed by', product: 'Product',
+      price: 'Price', status: 'Status', date: 'Order date'
+    };
+    const ORDER = ['id', 'owner', 'product', 'price', 'status', 'date'];
+
+    (async () => {
+      const username = await requireUser();
+      if (!username) return;
+      renderNav(username, 'orders');
+
+      const box = document.getElementById('details');
+      const id = window.location.pathname.split('/').pop();
+      const r = await getJSON('/orders/' + encodeURIComponent(id));
+
+      if (r.status === 404) { box.textContent = 'We could not find that order.'; box.className = 'empty'; return; }
+      if (!r.ok) { box.textContent = 'Could not load this order.'; box.className = 'empty'; return; }
+
+      const o = r.body;
+      document.getElementById('title').textContent = 'Order #' + o.id;
+
+      const keys = ORDER.filter((k) => k in o).concat(Object.keys(o).filter((k) => !ORDER.includes(k)));
+      const dl = document.createElement('dl');
+      dl.className = 'details';
+      keys.forEach((k) => {
+        const dt = document.createElement('dt');
+        dt.textContent = LABELS[k] || (k.charAt(0).toUpperCase() + k.slice(1));
+        const dd = document.createElement('dd');
+        dd.textContent = k === 'price' ? money(o[k]) : o[k];
+        dl.append(dt, dd);
+      });
+      box.textContent = '';
+      box.appendChild(dl);
+    })();
+  </script>
+</body>
+</html>

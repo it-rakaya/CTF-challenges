@@ -1,0 +1,6 @@
+node_modules
+npm-debug.log
+.git
+# Keep trainer material out of the image trainees can reach
+TRAINER.md
+README.md

@@ -1,0 +1,12 @@
+EMPLOYEE HANDBOOK
+=================
+
+Welcome to the company! This handbook covers our core values, code of
+conduct, and general workplace expectations.
+
+1. Be respectful and collaborative.
+2. Protect company and customer data.
+3. Follow the engineering guidelines published on the internal wiki.
+4. Reach out to HR for any workplace concerns.
+
+Thank you for being part of the team.

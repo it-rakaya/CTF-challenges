@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Log in — Bakery</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header class="nav">
+      <div class="brand">🥐 Bakery</div>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/admin">Admin</a>
+        <a href="/login">Login</a>
+      </nav>
+    </header>
+
+    <main>
+      <h1>Staff & Customer Login</h1>
+      <p>
+        Known accounts for this training environment:
+        <code>alice / alice123</code>.
+      </p>
+
+      <p id="error" class="error" style="display: none"></p>
+
+      <form id="login-form">
+        <label for="username">Username</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          autocomplete="username"
+          required
+        />
+
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          autocomplete="current-password"
+          required
+        />
+
+        <button type="submit">Log in</button>
+      </form>
+    </main>
+
+    <footer>Bakery &mdash; a training environment, not a real bakery.</footer>
+
+    <script>
+      document
+        .getElementById("login-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const username = document.getElementById("username").value;
+          const password = document.getElementById("password").value;
+          const errorEl = document.getElementById("error");
+          errorEl.style.display = "none";
+
+          const resp = await fetch("/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, password }),
+          });
+
+          if (resp.ok) {
+            window.location.href = "/dashboard";
+          } else {
+            const text = await resp.text();
+            errorEl.textContent = text || "Login failed.";
+            errorEl.style.display = "block";
+          }
+        });
+    </script>
+  </body>
+</html>

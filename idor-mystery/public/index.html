@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ShopNest - Sign in</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="login-wrap">
+    <div class="login-card">
+      <div class="brand">ShopNest</div>
+      <p>Sign in to view your orders.</p>
+      <div class="error" id="error"></div>
+      <label for="username">Username</label>
+      <input type="text" id="username" autocomplete="username" autofocus>
+      <label for="password">Password</label>
+      <input type="password" id="password" autocomplete="current-password">
+      <button class="btn" id="login-btn">Sign in</button>
+    </div>
+  </div>
+  <script src="/app.js"></script>
+  <script>
+    const errorEl = document.getElementById('error');
+
+    // Already signed in? Go straight to the dashboard.
+    getJSON('/api/me').then((r) => { if (r.ok) window.location.href = '/dashboard'; });
+
+    async function login() {
+      errorEl.textContent = '';
+      const res = await fetch('/login', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          username: document.getElementById('username').value.trim(),
+          password: document.getElementById('password').value
+        })
+      });
+      if (res.ok) {
+        window.location.href = '/dashboard';
+      } else {
+        const body = await res.json().catch(() => ({}));
+        errorEl.textContent = body.error || 'Sign in failed';
+      }
+    }
+
+    document.getElementById('login-btn').addEventListener('click', login);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Enter') login(); });
+  </script>
+</body>
+</html>

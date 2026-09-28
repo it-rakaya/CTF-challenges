@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ShopNest - Dashboard</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="nav" id="nav"></div>
+  <div class="container">
+    <h1 id="welcome">Welcome</h1>
+    <p class="subtitle">Here is a quick overview of your account.</p>
+
+    <div class="grid">
+      <div class="card">
+        <div class="stat-value" id="stat-count">-</div>
+        <div class="stat-label">Orders placed</div>
+      </div>
+      <div class="card">
+        <div class="stat-value" id="stat-total">-</div>
+        <div class="stat-label">Total spent</div>
+      </div>
+    </div>
+
+    <div class="card" id="latest-card">
+      <h2>Your latest order</h2>
+      <div id="latest">Loading...</div>
+    </div>
+
+    <a class="btn" href="/orders">Go to My Orders</a>
+  </div>
+
+  <script src="/app.js"></script>
+  <script>
+    (async () => {
+      const username = await requireUser();
+      if (!username) return;
+      renderNav(username, 'dashboard');
+      document.getElementById('welcome').textContent = 'Welcome back, ' + username + '!';
+
+      const r = await getJSON('/orders');
+      const list = r.ok ? r.body : [];
+      document.getElementById('stat-count').textContent = list.length;
+      document.getElementById('stat-total').textContent =
+        money(list.reduce((sum, o) => sum + o.price, 0));
+
+      const latest = document.getElementById('latest');
+      latest.textContent = '';
+      if (!list.length) {
+        latest.textContent = 'You have not placed any orders yet.';
+        latest.className = 'empty';
+        return;
+      }
+      const o = list[list.length - 1];
+      const p = document.createElement('p');
+      p.textContent = o.product + ' - ' + money(o.price) + ' ';
+      const badge = document.createElement('span');
+      badge.className = 'badge';
+      badge.textContent = o.status;
+      p.appendChild(badge);
+      const hint = document.createElement('p');
+      hint.className = 'empty';
+      hint.textContent = 'View your order details.';
+      const link = document.createElement('a');
+      link.href = '/orders/' + o.id;
+      link.textContent = 'Order #' + o.id + ' \u2192';
+      latest.append(p, hint, link);
+    })();
+  </script>
+</body>
+</html>
